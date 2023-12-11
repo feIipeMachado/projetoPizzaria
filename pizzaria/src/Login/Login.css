@@ -1,0 +1,28 @@
+.Login {
+    background-color: green;
+    height: 100vh;
+}
+
+form {
+    margin: auto;
+    gap: 10px;
+    display: flex;
+    justify-content: center;
+    width: 500px;
+    flex-direction: column;
+    padding: 30px;
+    
+    & img {
+        margin-top: 100px;
+    }
+
+    & input {
+        font-size: 30px;
+        height: 70px;
+        padding: 5px;
+        border-radius: 5px;
+        border: 2px solid red;
+    }
+
+
+}
