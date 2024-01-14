@@ -1,2 +1,2 @@
 # projetoPizzaria
-site de uma pizzaria
+Este projeto tem como objetivo desenvolver um site para uma pizzaria, usando uma combinação de React + Vite + Spring + Mongo
