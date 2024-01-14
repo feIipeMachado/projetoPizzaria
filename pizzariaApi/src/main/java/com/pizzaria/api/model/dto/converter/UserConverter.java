@@ -1,7 +1,7 @@
 package com.pizzaria.api.model.dto.converter;
 
-import com.pizzaria.api.model.User;
-import com.pizzaria.api.model.dto.UserRequestDto;
+import com.pizzaria.api.model.entity.User;
+import com.pizzaria.api.model.dto.request.UserRequestDto;
 import com.pizzaria.api.model.dto.response.UserResponseDto;
 
 import java.util.ArrayList;
@@ -10,17 +10,17 @@ import java.util.List;
 public class UserConverter {
 
     public static User dtoToEntityConverter(UserRequestDto dto) {
-        User userEntity = new User();
-        userEntity.setName(dto.getName());
-        userEntity.setEmail(dto.getEmail());
-        userEntity.setPassword(dto.getPassword());
+        User user = new User();
+        user.setUsername(dto.getUsername());
+        user.setEmail(dto.getEmail());
+        user.setPassword(dto.getPassword());
 
-        return userEntity;
+        return user;
     }
 
     public static UserResponseDto entityToDtoConverter (User entity) {
         UserResponseDto userResponse = new UserResponseDto();
-        userResponse.setName(entity.getName());
+        userResponse.setUsername(entity.getUsername());
         userResponse.setEmail(entity.getEmail());
         return userResponse;
     }

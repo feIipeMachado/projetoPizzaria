@@ -1,12 +1,12 @@
 package com.pizzaria.api.controller;
 
-import com.pizzaria.api.model.User;
-import com.pizzaria.api.model.dto.LoginForm;
-import com.pizzaria.api.model.dto.UserRequestDto;
+import com.pizzaria.api.model.entity.User;
+import com.pizzaria.api.model.forms.LoginForm;
+import com.pizzaria.api.model.dto.request.UserRequestDto;
 import com.pizzaria.api.model.dto.response.UserResponseDto;
 import com.pizzaria.api.service.UserService;
+import lombok.extern.java.Log;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -35,5 +35,10 @@ public class UserController {
     public ResponseEntity<User> removeUser(@RequestBody LoginForm loginForm) {
         service.removeUser(loginForm.getEmail(), loginForm.getPassword());
         return ResponseEntity.accepted().build();
+    }
+
+    @PostMapping("/login")
+    public ResponseEntity<UserResponseDto> loginUser(@RequestBody LoginForm loginForm) {
+        return ResponseEntity.ok(this.service.findUserByLoginForm(loginForm.getEmail(), loginForm.getPassword()));
     }
 }

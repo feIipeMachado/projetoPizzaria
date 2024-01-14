@@ -1,7 +1,7 @@
 package com.pizzaria.api.service;
 
-import com.pizzaria.api.model.User;
-import com.pizzaria.api.model.dto.UserRequestDto;
+import com.pizzaria.api.model.entity.User;
+import com.pizzaria.api.model.dto.request.UserRequestDto;
 import com.pizzaria.api.model.dto.converter.UserConverter;
 import com.pizzaria.api.model.dto.response.UserResponseDto;
 import com.pizzaria.api.repository.UserRepository;
@@ -46,8 +46,20 @@ public class UserService {
         if (!userEmailCheck.isEmpty()) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "O e-mail " + userEmail + " já está em uso.");
         } else {
-            User userEntity = UserConverter.dtoToEntityConverter(userDto);
-            repository.save(userEntity);
+            User user = UserConverter.dtoToEntityConverter(userDto);
+            repository.save(user);
+        }
+    }
+
+    public UserResponseDto findUserByLoginForm(String email, String password) {
+        Optional<User> userFound = repository.findByEmail(email);
+
+        if (userFound.isEmpty()) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "E-mail ou senha incorretos.");
+        } else if (!Objects.equals(userFound.get().getPassword(), password)) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "E-mail ou senha incorretos.");
+        } else {
+            return UserConverter.entityToDtoConverter(userFound.get());
         }
     }
 }
