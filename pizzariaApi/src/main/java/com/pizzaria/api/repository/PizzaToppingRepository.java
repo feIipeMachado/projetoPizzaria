@@ -9,6 +9,7 @@ import java.util.Optional;
 
 public interface PizzaToppingRepository extends MongoRepository<PizzaTopping, ObjectId> {
     public Optional<PizzaTopping> findByName(String name);
+    public Optional<PizzaTopping> findById(ObjectId id);
 
 
 }

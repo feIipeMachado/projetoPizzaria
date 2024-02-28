@@ -9,6 +9,7 @@ import com.pizzaria.api.model.dto.response.UserResponseDto;
 import com.pizzaria.api.model.entity.PizzaTopping;
 import com.pizzaria.api.model.entity.User;
 import com.pizzaria.api.repository.PizzaToppingRepository;
+import org.bson.types.ObjectId;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
@@ -40,6 +41,47 @@ public class PizzaToppingService {
         } else {
             PizzaTopping pizzaTopping = PizzaToppingConverter.dtoToEntityConverter(pizzaToppingDto);
             repository.save(pizzaTopping);
+        }
+    }
+
+    public PizzaToppingResponseDto removePizzaToppingById(ObjectId id) {
+        Optional<PizzaTopping> pizzaToppingToRemove = repository.findById(id);
+
+        if (pizzaToppingToRemove.isEmpty()) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Sabor " + pizzaToppingToRemove.get().getName() + " não existe");
+        } else {
+            repository.delete(pizzaToppingToRemove.get());
+            return PizzaToppingConverter.entityToDtoConverter(pizzaToppingToRemove.get());
+        }
+    }
+
+    public PizzaTopping editPizzaToppingName(String name, ObjectId id) {
+        Optional<PizzaTopping> pizzaToppingToEdit = repository.findById(id);
+        if (pizzaToppingToEdit.isEmpty()) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Sabor " + pizzaToppingToEdit.get().getName() + " não existe");
+        } else {
+            pizzaToppingToEdit.get().setName(name);
+            return pizzaToppingToEdit.get();
+        }
+    }
+
+    public PizzaTopping editPizzaToppingDescription(String description, ObjectId id) {
+        Optional<PizzaTopping> pizzaToppingToEdit = repository.findById(id);
+        if (pizzaToppingToEdit.isEmpty()) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Sabor " + pizzaToppingToEdit.get().getName() + " não existe");
+        } else {
+            pizzaToppingToEdit.get().setDescription(description);
+            return pizzaToppingToEdit.get();
+        }
+    }
+
+    public PizzaTopping editPizzaToppingImageUrl(String imageUrl, ObjectId id) {
+        Optional<PizzaTopping> pizzaToppingToEdit = repository.findById(id);
+        if (pizzaToppingToEdit.isEmpty()) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Sabor " + pizzaToppingToEdit.get().getName() + " não existe");
+        } else {
+            pizzaToppingToEdit.get().setImageUrl(imageUrl);
+            return pizzaToppingToEdit.get();
         }
     }
 
