@@ -5,8 +5,13 @@ import com.pizzaria.api.model.dto.request.UserRequestDto;
 import com.pizzaria.api.model.dto.converter.UserConverter;
 import com.pizzaria.api.model.dto.response.UserResponseDto;
 import com.pizzaria.api.repository.UserRepository;
+import org.bson.types.ObjectId;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
@@ -59,6 +64,20 @@ public class UserService {
         } else if (!Objects.equals(userFound.get().getPassword(), password)) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "E-mail ou senha incorretos.");
         } else {
+            return UserConverter.entityToDtoConverter(userFound.get());
+        }
+    }
+
+    public UserResponseDto editUsername(String password, String username, ObjectId id) {
+        Optional<User> userFound = repository.findById(id);
+
+        if (userFound.isEmpty()) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Usuário não existe.");
+        } else if (!Objects.equals(userFound.get().getPassword(), password)) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "E-mail ou senha incorretos.");
+        } else {
+            userFound.get().setUsername(username);
+            repository.save(userFound.get());
             return UserConverter.entityToDtoConverter(userFound.get());
         }
     }

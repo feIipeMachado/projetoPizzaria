@@ -14,6 +14,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
@@ -81,6 +82,16 @@ public class PizzaToppingService {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Sabor " + pizzaToppingToEdit.get().getName() + " não existe");
         } else {
             pizzaToppingToEdit.get().setImageUrl(imageUrl);
+            return pizzaToppingToEdit.get();
+        }
+    }
+
+    public PizzaTopping editPizzaToppingPrice(BigDecimal price, ObjectId id) {
+        Optional<PizzaTopping> pizzaToppingToEdit = repository.findById(id);
+        if (pizzaToppingToEdit.isEmpty()) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Sabor " + pizzaToppingToEdit.get().getName() + " não existe");
+        } else {
+            pizzaToppingToEdit.get().setPrice(price);
             return pizzaToppingToEdit.get();
         }
     }

@@ -14,6 +14,7 @@ public class PizzaToppingConverter {
         pizzaTopping.setName(dto.getName());
         pizzaTopping.setDescription(dto.getDescription());
         pizzaTopping.setImageUrl(dto.getImageUrl());
+        pizzaTopping.setPrice(dto.getPrice());
 
         return pizzaTopping;
     }
@@ -23,6 +24,7 @@ public class PizzaToppingConverter {
         pizzaToppingResponse.setName(entity.getName());
         pizzaToppingResponse.setDescription(entity.getDescription());
         pizzaToppingResponse.setImageUrl(entity.getImageUrl());
+        pizzaToppingResponse.setPrice(entity.getPrice());
         return pizzaToppingResponse;
     }
 
