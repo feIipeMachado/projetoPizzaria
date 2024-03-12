@@ -32,7 +32,7 @@ public class UserService {
         return UserConverter.entityListToDtoListConverter(userList);
     }
 
-    public User removeUser(String email, String password) {
+    public UserResponseDto removeUser(String email, String password) {
         Optional<User> userToRemove = repository.findByEmail(email);
 
         if (userToRemove.isEmpty()) {
@@ -41,7 +41,7 @@ public class UserService {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Senha incorreta.");
         } else {
             repository.delete(userToRemove.get());
-            return userToRemove.get();
+            return UserConverter.entityToDtoConverter(userToRemove.get());
         }
     }
     public void addUser(UserRequestDto userDto) {
@@ -74,11 +74,27 @@ public class UserService {
         if (userFound.isEmpty()) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Usuário não existe.");
         } else if (!Objects.equals(userFound.get().getPassword(), password)) {
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "E-mail ou senha incorretos.");
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Senha incorreta.");
         } else {
             userFound.get().setUsername(username);
             repository.save(userFound.get());
             return UserConverter.entityToDtoConverter(userFound.get());
         }
     }
+
+    public UserResponseDto editPassword(String password, String newPassword, ObjectId id) {
+        Optional<User> userFound = repository.findById(id);
+
+        if (userFound.isEmpty()) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Usuário não existe.");
+        } else if (!Objects.equals(userFound.get().getPassword(), password)) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Senha incorreta.");
+        } else {
+            userFound.get().setPassword(newPassword);
+            repository.save(userFound.get());
+            return UserConverter.entityToDtoConverter(userFound.get());
+        }
+    }
+
+
 }

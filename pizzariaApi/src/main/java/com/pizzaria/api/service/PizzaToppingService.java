@@ -56,43 +56,43 @@ public class PizzaToppingService {
         }
     }
 
-    public PizzaTopping editPizzaToppingName(String name, ObjectId id) {
+    public PizzaToppingResponseDto editPizzaToppingName(String name, ObjectId id) {
         Optional<PizzaTopping> pizzaToppingToEdit = repository.findById(id);
         if (pizzaToppingToEdit.isEmpty()) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Sabor " + pizzaToppingToEdit.get().getName() + " não existe");
         } else {
             pizzaToppingToEdit.get().setName(name);
-            return pizzaToppingToEdit.get();
+            return PizzaToppingConverter.entityToDtoConverter(pizzaToppingToEdit.get());
         }
     }
 
-    public PizzaTopping editPizzaToppingDescription(String description, ObjectId id) {
+    public PizzaToppingResponseDto editPizzaToppingDescription(String description, ObjectId id) {
         Optional<PizzaTopping> pizzaToppingToEdit = repository.findById(id);
         if (pizzaToppingToEdit.isEmpty()) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Sabor " + pizzaToppingToEdit.get().getName() + " não existe");
         } else {
             pizzaToppingToEdit.get().setDescription(description);
-            return pizzaToppingToEdit.get();
+            return PizzaToppingConverter.entityToDtoConverter(pizzaToppingToEdit.get());
         }
     }
 
-    public PizzaTopping editPizzaToppingImageUrl(String imageUrl, ObjectId id) {
+    public PizzaToppingResponseDto editPizzaToppingImageUrl(String imageUrl, ObjectId id) {
         Optional<PizzaTopping> pizzaToppingToEdit = repository.findById(id);
         if (pizzaToppingToEdit.isEmpty()) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Sabor " + pizzaToppingToEdit.get().getName() + " não existe");
         } else {
             pizzaToppingToEdit.get().setImageUrl(imageUrl);
-            return pizzaToppingToEdit.get();
+            return PizzaToppingConverter.entityToDtoConverter(pizzaToppingToEdit.get());
         }
     }
 
-    public PizzaTopping editPizzaToppingPrice(BigDecimal price, ObjectId id) {
+    public PizzaToppingResponseDto editPizzaToppingPrice(BigDecimal price, ObjectId id) {
         Optional<PizzaTopping> pizzaToppingToEdit = repository.findById(id);
         if (pizzaToppingToEdit.isEmpty()) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Sabor " + pizzaToppingToEdit.get().getName() + " não existe");
         } else {
             pizzaToppingToEdit.get().setPrice(price);
-            return pizzaToppingToEdit.get();
+            return PizzaToppingConverter.entityToDtoConverter(pizzaToppingToEdit.get());
         }
     }
 

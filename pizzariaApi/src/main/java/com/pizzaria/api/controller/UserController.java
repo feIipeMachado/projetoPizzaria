@@ -1,7 +1,8 @@
 package com.pizzaria.api.controller;
 
 import com.pizzaria.api.model.entity.User;
-import com.pizzaria.api.model.forms.EditForm;
+import com.pizzaria.api.model.forms.EditPasswordForm;
+import com.pizzaria.api.model.forms.EditUsernameForm;
 import com.pizzaria.api.model.forms.LoginForm;
 import com.pizzaria.api.model.dto.request.UserRequestDto;
 import com.pizzaria.api.model.dto.response.UserResponseDto;
@@ -33,15 +34,22 @@ public class UserController {
     }
 
     @DeleteMapping
-    public ResponseEntity<User> removeUser(@RequestBody LoginForm loginForm) {
+    public ResponseEntity<Void> removeUser(@RequestBody LoginForm loginForm) {
         service.removeUser(loginForm.getEmail(), loginForm.getPassword());
         return ResponseEntity.accepted().build();
     }
 
     @PutMapping("/edit/{id}/username")
     public ResponseEntity<Void> editUsername(@PathVariable("id") ObjectId id,
-                                             @RequestBody EditForm editForm) {
-        service.editUsername(editForm.getPassword(), editForm.getItemToEdit(), id);
+                                             @RequestBody EditUsernameForm editUsernameForm) {
+        service.editUsername(editUsernameForm.getPassword(), editUsernameForm.getUsername(), id);
+        return ResponseEntity.noContent().build();
+    }
+
+    @PutMapping("/edit/{id}/password")
+    public ResponseEntity<Void> editPassword(@PathVariable("id") ObjectId id,
+                                             @RequestBody EditPasswordForm editPasswordForm) {
+        service.editPassword(editPasswordForm.getPassword(), editPasswordForm.getNewPassword(), id);
         return ResponseEntity.noContent().build();
     }
 

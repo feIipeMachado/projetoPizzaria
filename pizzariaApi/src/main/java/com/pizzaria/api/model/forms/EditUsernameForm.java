@@ -3,8 +3,8 @@ package com.pizzaria.api.model.forms;
 import lombok.Data;
 
 @Data
-public class EditForm {
+public class EditUsernameForm {
 
     private String password;
-    private String itemToEdit;
+    private String username;
 }
