@@ -62,6 +62,7 @@ public class PizzaToppingService {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Sabor " + pizzaToppingToEdit.get().getName() + " não existe");
         } else {
             pizzaToppingToEdit.get().setName(name);
+            repository.save(pizzaToppingToEdit.get());
             return PizzaToppingConverter.entityToDtoConverter(pizzaToppingToEdit.get());
         }
     }
@@ -72,6 +73,7 @@ public class PizzaToppingService {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Sabor " + pizzaToppingToEdit.get().getName() + " não existe");
         } else {
             pizzaToppingToEdit.get().setDescription(description);
+            repository.save(pizzaToppingToEdit.get());
             return PizzaToppingConverter.entityToDtoConverter(pizzaToppingToEdit.get());
         }
     }
@@ -82,6 +84,7 @@ public class PizzaToppingService {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Sabor " + pizzaToppingToEdit.get().getName() + " não existe");
         } else {
             pizzaToppingToEdit.get().setImageUrl(imageUrl);
+            repository.save(pizzaToppingToEdit.get());
             return PizzaToppingConverter.entityToDtoConverter(pizzaToppingToEdit.get());
         }
     }
@@ -92,6 +95,7 @@ public class PizzaToppingService {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Sabor " + pizzaToppingToEdit.get().getName() + " não existe");
         } else {
             pizzaToppingToEdit.get().setPrice(price);
+            repository.save(pizzaToppingToEdit.get());
             return PizzaToppingConverter.entityToDtoConverter(pizzaToppingToEdit.get());
         }
     }

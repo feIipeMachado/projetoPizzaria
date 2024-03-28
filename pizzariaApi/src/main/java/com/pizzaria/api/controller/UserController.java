@@ -28,15 +28,15 @@ public class UserController {
     }
 
     @PostMapping
-    public ResponseEntity<Void> addUser (@RequestBody UserRequestDto userDto) {
+    public ResponseEntity<Void> addUser(@RequestBody UserRequestDto userDto) {
         service.addUser(userDto);
         return ResponseEntity.created(null).build();
     }
 
     @DeleteMapping
-    public ResponseEntity<Void> removeUser(@RequestBody LoginForm loginForm) {
+    public ResponseEntity<UserResponseDto> removeUser(@RequestBody LoginForm loginForm) {
         service.removeUser(loginForm.getEmail(), loginForm.getPassword());
-        return ResponseEntity.accepted().build();
+        return ResponseEntity.ok(service.removeUser(loginForm.getEmail(), loginForm.getPassword()));
     }
 
     @PutMapping("/edit/{id}/username")

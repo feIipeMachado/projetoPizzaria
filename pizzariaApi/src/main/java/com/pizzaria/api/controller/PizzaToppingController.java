@@ -1,14 +1,7 @@
 package com.pizzaria.api.controller;
 
 import com.pizzaria.api.model.dto.request.PizzaToppingRequestDto;
-import com.pizzaria.api.model.dto.request.UserRequestDto;
 import com.pizzaria.api.model.dto.response.PizzaToppingResponseDto;
-import com.pizzaria.api.model.dto.response.UserResponseDto;
-import com.pizzaria.api.model.entity.User;
-import com.pizzaria.api.model.forms.EditPizzaTopping;
-import com.pizzaria.api.model.forms.EditPizzaToppingPrice;
-import com.pizzaria.api.model.forms.EditUsernameForm;
-import com.pizzaria.api.model.forms.LoginForm;
 import com.pizzaria.api.service.PizzaToppingService;
 import org.bson.types.ObjectId;
 import org.springframework.http.ResponseEntity;
@@ -38,32 +31,36 @@ public class PizzaToppingController {
         return ResponseEntity.created(null).build();
     }
 
-    @DeleteMapping
-    public ResponseEntity<PizzaToppingResponseDto> removePizzaTopping(@RequestBody ObjectId id) {
+    @DeleteMapping("/delete/{id}")
+    public ResponseEntity<PizzaToppingResponseDto> removePizzaTopping(@PathVariable("id") ObjectId id) {
         return ResponseEntity.ok(service.removePizzaToppingById(id));
     }
 
-    @PutMapping("/edit/name")
-    public ResponseEntity<Void> editPizzaToppingName(@RequestBody EditPizzaTopping editPizzaTopping) {
-        service.editPizzaToppingName(editPizzaTopping.getFieldToEdit(), editPizzaTopping.getId());
+    @PutMapping("/edit/{id}/name")
+    public ResponseEntity<Void> editPizzaToppingName(@PathVariable("id") ObjectId id,
+                                                     @RequestBody String name) {
+        service.editPizzaToppingName(name, id);
         return ResponseEntity.noContent().build();
     }
 
-    @PutMapping("/edit/description")
-    public ResponseEntity<Void> editPizzaToppingDescription(@RequestBody EditPizzaTopping editPizzaTopping) {
-        service.editPizzaToppingDescription(editPizzaTopping.getFieldToEdit(), editPizzaTopping.getId());
+    @PutMapping("/edit/{id}/description")
+    public ResponseEntity<Void> editPizzaToppingDescription(@PathVariable("id") ObjectId id,
+                                                            @RequestBody String description) {
+        service.editPizzaToppingDescription(description, id);
         return ResponseEntity.noContent().build();
     }
 
-    @PutMapping("/edit/imageUrl")
-    public ResponseEntity<Void> editPizzaToppingImageUrl(@RequestBody EditPizzaTopping editPizzaTopping) {
-        service.editPizzaToppingImageUrl(editPizzaTopping.getFieldToEdit(), editPizzaTopping.getId());
+    @PutMapping("/edit/{id}/imageUrl")
+    public ResponseEntity<Void> editPizzaToppingImageUrl(@PathVariable("id") ObjectId id,
+                                                         @RequestBody String imageUrl) {
+        service.editPizzaToppingImageUrl(imageUrl, id);
         return ResponseEntity.noContent().build();
     }
 
-    @PutMapping("/edit/price")
-    public ResponseEntity<Void> editPizzaToppingPrice(@RequestBody EditPizzaToppingPrice editPizzaToppingPrice) {
-        service.editPizzaToppingPrice(editPizzaToppingPrice.getPrice(), editPizzaToppingPrice.getId());
+    @PutMapping("/edit/{id}/price")
+    public ResponseEntity<Void> editPizzaToppingPrice(@PathVariable("id") ObjectId id,
+                                                      @RequestBody BigDecimal price) {
+        service.editPizzaToppingPrice(price, id);
         return ResponseEntity.noContent().build();
     }
 
