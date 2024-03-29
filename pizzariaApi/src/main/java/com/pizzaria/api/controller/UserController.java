@@ -35,7 +35,6 @@ public class UserController {
 
     @DeleteMapping
     public ResponseEntity<UserResponseDto> removeUser(@RequestBody LoginForm loginForm) {
-        service.removeUser(loginForm.getEmail(), loginForm.getPassword());
         return ResponseEntity.ok(service.removeUser(loginForm.getEmail(), loginForm.getPassword()));
     }
 
