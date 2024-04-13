@@ -9,7 +9,7 @@ export function Home() {
     )
 }
 
-function MyNavbar() {
+export function MyNavbar() {
     return (
         <nav className='nav'>
             <a href='/' className='site-title'>
