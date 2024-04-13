@@ -50,25 +50,44 @@ function Example() {
   const handleShow = () => setShow(true);
 
   const [pizzaTopping, setPizzaTopping] = useState({
-    name:"",
-    description:"",
-    imageUrl:""
-  })
+    name: "",
+    description: "",
+    imageUrl: ""
+  });
 
-  const handleChange = (e) =>{
-    setPizzaTopping((prev) => ({ ...prev, [e.target.name]: e.target.value }))
-  }
+  const [imageBase64, setImageBase64] = useState(""); // Novo estado para armazenar a imagem em base64
 
-  const handleClick = async e => {
-    location.reload()
+  const handleChange = (e) => {
+    if (e.target.name === "imageUrl") {
+      const file = e.target.files[0];
+      const reader = new FileReader();
+
+      reader.onloadend = () => {
+        setImageBase64(reader.result); // Atualiza o estado com a imagem em base64
+      };
+
+      reader.readAsDataURL(file);
+    } else {
+      setPizzaTopping((prev) => ({ ...prev, [e.target.name]: e.target.value }));
+    }
+  };
+
+  const handleClick = async (e) => {
+    
     try {
-      await axios.post("http://localhost:8080/pizzaria-api/v1/pizzaToppings", pizzaTopping)
-    } catch(err){
+      if (!pizzaTopping.name || !pizzaTopping.description || !imageBase64) {
+        alert("Por favor, preencha todos os campos obrigatórios.")
+      }
+
+      await axios.post("http://localhost:8080/pizzaria-api/v1/pizzaToppings", {
+        ...pizzaTopping,
+        imageUrl: imageBase64
+      })
+      location.reload()
+    } catch (err) {
       console.log(err)
     }
   }
-
-  console.log(pizzaTopping)
 
   return (
     <>
@@ -107,10 +126,10 @@ function Example() {
             </Form.Group>
             <Form.Group controlId="formFile" className="mb-3">
               <Form.Label>Imagem do sabor</Form.Label>
-              <Form.Control 
-              type="file" 
-              name="imageUrl"
-              onChange={handleChange}
+              <Form.Control
+                type="file"
+                name="imageUrl"
+                onChange={handleChange}
               />
             </Form.Group>
           </Form>
@@ -125,8 +144,6 @@ function Example() {
         </Modal.Footer>
       </Modal>
     </>
-  );
+  )
+
 }
-
-
-
