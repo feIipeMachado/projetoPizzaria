@@ -1,6 +1,7 @@
 package com.pizzaria.api.model.dto.request;
 
 import lombok.Data;
+import org.bson.types.ObjectId;
 
 import java.math.BigDecimal;
 

@@ -7,6 +7,7 @@ import java.math.BigDecimal;
 @Data
 public class PizzaToppingResponseDto {
 
+    private String id;
     private String name;
     private String description;
     private String imageUrl;

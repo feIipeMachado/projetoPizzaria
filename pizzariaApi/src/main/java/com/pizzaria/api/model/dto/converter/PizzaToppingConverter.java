@@ -21,6 +21,7 @@ public class PizzaToppingConverter {
 
     public static PizzaToppingResponseDto entityToDtoConverter (PizzaTopping entity) {
         PizzaToppingResponseDto pizzaToppingResponse= new PizzaToppingResponseDto();
+        pizzaToppingResponse.setId(entity.getId().toHexString());
         pizzaToppingResponse.setName(entity.getName());
         pizzaToppingResponse.setDescription(entity.getDescription());
         pizzaToppingResponse.setImageUrl(entity.getImageUrl());

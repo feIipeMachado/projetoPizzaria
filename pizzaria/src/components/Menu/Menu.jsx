@@ -24,16 +24,31 @@ export const Menu = () => {
     fetchAllPizzaToppings()
   }, [])
 
+  const handleDelete = async (id)=> {
+    try{
+      await axios.delete("http://localhost:8080/pizzaria-api/v1/pizzaToppings/delete/" + id)
+      window.location.reload()
+    }catch(err){
+      console.log(err)
+    }
+  }
+
   return (
     <div>
       <h1>Sabores</h1>
       <div className="pizzaToppings">
         {pizzaToppings.map(pizzaTopping => (
-          <div className="pizzaToping">
+          <div className="pizzaToping" key={pizzaTopping.id}>
             <img src={pizzaTopping.imageUrl} />
             <h2>{pizzaTopping.name}</h2>
             <p>{pizzaTopping.description}</p>
-
+            <Button
+              className="removeButton"
+              variant="primary"
+              onClick={()=>handleDelete(pizzaTopping.id)}
+              >
+              Deletar sabor
+            </Button>
 
           </div>
         ))}
@@ -73,7 +88,7 @@ function Example() {
   };
 
   const handleClick = async (e) => {
-    
+
     try {
       if (!pizzaTopping.name || !pizzaTopping.description || !imageBase64) {
         alert("Por favor, preencha todos os campos obrigatórios.")
@@ -91,7 +106,10 @@ function Example() {
 
   return (
     <>
-      <Button variant="primary" onClick={handleShow}>
+      <Button
+        variant="primary"
+        onClick={handleShow}
+        className="addButton">
         Adicionar sabor
       </Button>
 
