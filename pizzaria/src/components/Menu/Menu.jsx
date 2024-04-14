@@ -1,15 +1,23 @@
 import React, { useEffect, useState } from 'react';
-import { MyNavbar } from '../Home/Home';
+import { MyNavbar } from '../MyNavBar/MyNavBar';
 import axios from 'axios';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import Modal from 'react-bootstrap/Modal';
-import { Link } from 'react-router-dom';
-import { SliderMark } from '@mui/material';
-
+import './Menu.css'
 
 export const Menu = () => {
   const [pizzaToppings, setPizzaToppings] = useState([])
+
+  const [showDeleteButton, setShowDeleteButton] = useState(false);
+
+  const handleMouseEnter = () => {
+    setShowDeleteButton(true);
+  };
+
+  const handleMouseLeave = () => {
+    setShowDeleteButton(false);
+  };
 
   useEffect(() => {
     const fetchAllPizzaToppings = async () => {
@@ -24,42 +32,52 @@ export const Menu = () => {
     fetchAllPizzaToppings()
   }, [])
 
-  const handleDelete = async (id)=> {
-    try{
+  const handleDelete = async (id) => {
+    try {
       await axios.delete("http://localhost:8080/pizzaria-api/v1/pizzaToppings/delete/" + id)
       window.location.reload()
-    }catch(err){
+    } catch (err) {
       console.log(err)
     }
   }
 
   return (
     <div>
-      <h1>Sabores</h1>
+      <MyNavbar></MyNavbar>
+      <h1 className="titleSection">Sabores</h1>
       <div className="pizzaToppings">
         {pizzaToppings.map(pizzaTopping => (
-          <div className="pizzaToping" key={pizzaTopping.id}>
-            <img src={pizzaTopping.imageUrl} />
+          <div className="pizzaToping" key={pizzaTopping.id}
+            onMouseEnter={handleMouseEnter}
+            onMouseLeave={handleMouseLeave}
+          >
+            <img src={pizzaTopping.imageUrl}
+              
+            />
+
+            {showDeleteButton && (
+              <Button
+                className="removeButton"
+                variant="outlined"
+                onClick={() => handleDelete(pizzaTopping.id)}
+                >
+                  Remover 
+              </Button>
+            )}
             <h2>{pizzaTopping.name}</h2>
             <p>{pizzaTopping.description}</p>
-            <Button
-              className="removeButton"
-              variant="primary"
-              onClick={()=>handleDelete(pizzaTopping.id)}
-              >
-              Deletar sabor
-            </Button>
+
 
           </div>
         ))}
       </div>
-      <Example></Example>
+      <AddPizzaToppingModal></AddPizzaToppingModal>
     </div>
   )
 
 }
 
-function Example() {
+function AddPizzaToppingModal() {
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);

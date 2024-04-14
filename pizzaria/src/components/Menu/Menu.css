@@ -1,0 +1,60 @@
+
+.pizzaToppings {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.titleSection {
+    margin-top: 150px;
+    color: #5e0101;
+}
+
+.pizzaToping {
+    width: 25%;
+    height: 300px;
+    margin: 50px;
+    margin-top: 30px;
+    padding: 20px;
+    padding-bottom: 60px;
+    text-align: center;
+    position: relative
+}
+
+.pizzaToping img {
+
+    width: 100%;
+    height: 100%;
+    object-fit: fill;
+}
+
+.pizzaToping h2 {
+    margin-top: 30px;
+    font-size: 25px;
+
+}
+
+@media (max-width: 768px) {
+    .pizzaToping {
+        width: 100%;
+    }
+}
+
+.removeButton {
+    position: absolute;
+    top: 25px; 
+    right: 25px; 
+    visibility: hidden;
+  }
+
+.pizzaToping:hover .removeButton {
+    background-color: white;
+    border-color: #5e0101;
+    visibility: visible;
+    color: #5e0101;
+}
+
+
+
+.addButton {
+    margin-top: 50px;
+}

@@ -39,6 +39,9 @@ public class PizzaToppingService {
 
         if (!pizzaToppingNameCheck.isEmpty()) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "O sabor de " + pizzaToppingName + " já está cadastrado.");
+        } else if (pizzaToppingDto.getName().isEmpty() | pizzaToppingDto.getDescription().isEmpty() |
+                pizzaToppingDto.getImageUrl().isEmpty()) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Por favor, preencha todos os campos");
         } else {
             PizzaTopping pizzaTopping = PizzaToppingConverter.dtoToEntityConverter(pizzaToppingDto);
             repository.save(pizzaTopping);
