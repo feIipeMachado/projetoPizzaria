@@ -10,6 +10,7 @@
 }
 
 .pizzaToping {
+    margin-top: 1px;
     width: 25%;
     height: 300px;
     margin: 50px;
@@ -56,5 +57,5 @@
 
 
 .addButton {
-    margin-top: 50px;
+    margin-top: 200px;
 }
