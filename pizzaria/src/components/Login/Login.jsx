@@ -3,33 +3,35 @@ import logoPizzaria from '../../assets/logopizzaria.png'
 import axios from 'axios';
 import { useNavigate } from "react-router-dom";
 
-export function Login() {
-    const navigate = useNavigate();
+export function Login({ onLogin }) {
+
+    const navigate = useNavigate()
 
     const handleSubmit = (event) => {
-        const {email, password} = event.target;
+        const { email, password } = event.target;
         axios.post('http://localhost:8080/pizzaria-api/v1/users/login', {
-          email: email.value,
-          password: password.value
+            email: email.value,
+            password: password.value
         }).then(function (response) {
             console.log(response)
             alert("login feito com sucesso!")
             navigate('/')
+            onLogin()
         })
-        .catch(function (error) {
-            console.log(error.toJSON());
-            alert("Email ou senha inválidos")
-          });
-        
-      }
+            .catch(function (error) {
+                console.log(error.toJSON());
+                alert("Email ou senha inválidos")
+            });
 
-      return(
-        <Form onSubmit={handleSubmit}/>
-      )
+    }
+
+    return (
+        <Form onSubmit={handleSubmit} />
+    )
 
 }
 
-function Form({onSubmit}) {
+function Form({ onSubmit }) {
     return (
         <form onSubmit={(event) => {
             event.preventDefault();

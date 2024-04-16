@@ -6,7 +6,7 @@ import Form from 'react-bootstrap/Form';
 import Modal from 'react-bootstrap/Modal';
 import './Menu.css'
 
-export const Menu = () => {
+export const Menu = ( {isLoggedIn, handleLogout }) => {
   const [pizzaToppings, setPizzaToppings] = useState([])
 
   const [showDeleteButton, setShowDeleteButton] = useState(false);
@@ -35,7 +35,6 @@ export const Menu = () => {
   const handleDelete = async (id) => {
     try {
       await axios.delete("http://localhost:8080/pizzaria-api/v1/pizzaToppings/delete/" + id)
-      window.location.reload()
     } catch (err) {
       console.log(err)
     }
@@ -43,8 +42,8 @@ export const Menu = () => {
 
   return (
     <div>
-      <MyNavbar></MyNavbar>
-      <h1 className="titleSection">Sabores</h1>
+      <MyNavbar isLoggedIn={isLoggedIn} handleLogout={handleLogout}></MyNavbar>
+      <h1 className="titleSection">Nossos sabores</h1>
       <div className="pizzaToppings">
         {pizzaToppings.map(pizzaTopping => (
           <div className="pizzaToping" key={pizzaTopping.id}
@@ -55,7 +54,7 @@ export const Menu = () => {
               
             />
 
-            {showDeleteButton && (
+            {isLoggedIn && showDeleteButton && (
               <Button
                 className="removeButton"
                 variant="outlined"
@@ -71,7 +70,7 @@ export const Menu = () => {
           </div>
         ))}
       </div>
-      <AddPizzaToppingModal></AddPizzaToppingModal>
+      {isLoggedIn && <AddPizzaToppingModal></AddPizzaToppingModal>}
     </div>
   )
 
@@ -88,7 +87,7 @@ function AddPizzaToppingModal() {
     imageUrl: ""
   });
 
-  const [imageBase64, setImageBase64] = useState(""); // Novo estado para armazenar a imagem em base64
+  const [imageBase64, setImageBase64] = useState(""); 
 
   const handleChange = (e) => {
     if (e.target.name === "imageUrl") {
@@ -96,7 +95,7 @@ function AddPizzaToppingModal() {
       const reader = new FileReader();
 
       reader.onloadend = () => {
-        setImageBase64(reader.result); // Atualiza o estado com a imagem em base64
+        setImageBase64(reader.result); 
       };
 
       reader.readAsDataURL(file);

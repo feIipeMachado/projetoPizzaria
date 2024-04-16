@@ -5,7 +5,7 @@ import loginIcon from '../../assets/login-icon.svg'
 
 
 
-export function MyNavbar() {
+export function MyNavbar({ isLoggedIn, handleLogout }) {
 
 
     return (
@@ -25,22 +25,46 @@ export function MyNavbar() {
                     <a href='/cardapio' className='nav-link'>Cardápio</a>
                 </li>
                 <li>
-                    <a href='/contato' className='nav-link'>Contato</a>
+                    <a href='/contato' className='nav-link'>Faça seu pedido</a>
                 </li>
                 <li>
                     <a href='/sobre-nos' className='nav-link'>Sobre nós</a>
                 </li>
+
                 <li>
-                    <Button href='/login' className='buttonLogin' variant="outlined"
-                        startIcon={<img src={loginIcon} alt="Login" />}>
-                        <span>Login</span>
-                    </Button>
+                    {isLoggedIn ? (
+                        <li>
+                            <Button onClick={handleLogout}
+                                className='buttonLogin'
+                                variant="outlined"
+                                startIcon={<img src={loginIcon} alt="Logout" />}>
+                                <span>Logout</span>
+                            </Button>
+                        </li>
+                    ) : (
+                        <li>
+                            <Button href='/login' className='buttonLogin' variant="outlined"
+                                startIcon={<img src={loginIcon} alt="Logout" />}>
+                                <span>Login</span>
+                            </Button>
+                        </li>
+                    )}
                 </li>
                 <li>
-                    <a href='/login' className='nav-link' class='inactive'>Login</a>
+                    {isLoggedIn ? (
+                        <li>
+                            <a href="/" onClick={(event) => { handleLogout(); event.preventDefault(); }} className='nav-link' class='inactive'>Logout</a>
+                        </li>
+                    ) : (
+                        <li>
+                            <a href='/login' className='nav-link' class='inactive'>Login</a>
+                        </li>
+                    )}
                 </li>
             </ul>
 
         </nav>
     )
 }
+
+

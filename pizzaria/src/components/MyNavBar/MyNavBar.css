@@ -12,7 +12,7 @@
     justify-content: space-between;
     align-items: center;
     padding-right: 32px;
-    z-index: 1000; /* Define a ordem de empilhamento da barra de navegação */
+    z-index: 1000; 
 
 }
 
@@ -113,7 +113,7 @@ a.active,a:hover{
 
     .checkbtn{
         display: block;
-        margin-left: 35px; /* Ajustando a margem direita */
+        margin-left: 35px; 
     }
 
     .checkbtn:hover {
@@ -139,16 +139,16 @@ a.active,a:hover{
 
     .nav ul li a {
         display: block;
-        color: #ffffff; /* Cor do texto */
+        color: #ffffff; 
         text-decoration: none;
-        padding: 30px; /* Adicione um preenchimento para tornar os itens clicáveis */
+        padding: 30px; 
     }
     #check:checked ~ ul{
         left: 0px;
     }
     .nav ul li a.active {
         font-size: 22px;
-        display: inline-block; /* Ou a propriedade que for adequada ao seu layout */
+        display: inline-block; 
     }
 
     .nav .buttonLogin {
@@ -157,12 +157,15 @@ a.active,a:hover{
 
     .nav ul li a.inactive {
         font-size: 22px;
-        display: inline-block; /* Ou a propriedade que for adequada ao seu layout */
+        display: inline-block; 
     }
 }
 
 @media (max-width:450px){
     
+    .nav .site-title {
+        font-size: 40px;
+    }
     .nav .nav-link {
         font-size: 25px;
         padding-top: 20px;
@@ -170,6 +173,6 @@ a.active,a:hover{
     
     .checkbtn{
         display: block;
-        margin-top: 15px; /* Ajustando a margem direita */
+        margin-top: 15px; 
     }
 }

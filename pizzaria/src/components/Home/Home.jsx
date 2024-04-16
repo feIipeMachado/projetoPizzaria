@@ -1,8 +1,11 @@
 import { MyNavbar } from '../MyNavBar/MyNavBar';
 
 
-export function Home() {
+export function Home({ isLoggedIn, handleLogout }) {
     return (
-        <MyNavbar></MyNavbar>
+        <div>
+            <MyNavbar isLoggedIn={isLoggedIn} handleLogout={handleLogout}/>
+            {isLoggedIn && <div>Olá, usuário</div>}
+        </div>
     )
 }
