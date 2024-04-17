@@ -27,9 +27,7 @@ export function MyNavbar({ isLoggedIn, handleLogout }) {
                 <li>
                     <a href='/contato' className='nav-link'>Faça seu pedido</a>
                 </li>
-                <li>
-                    <a href='/sobre-nos' className='nav-link'>Sobre nós</a>
-                </li>
+        
 
                 <li>
                     {isLoggedIn ? (

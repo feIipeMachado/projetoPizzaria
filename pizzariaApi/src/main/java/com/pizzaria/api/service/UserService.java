@@ -50,6 +50,8 @@ public class UserService {
 
         if (!userEmailCheck.isEmpty()) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "O e-mail " + userEmail + " já está em uso.");
+        } else if (userDto.getUsername().isEmpty() | userDto.getPassword().isEmpty() | userDto.getEmail().isEmpty()) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Por favor, preencha todos os campos.");
         } else {
             User user = UserConverter.dtoToEntityConverter(userDto);
             repository.save(user);
