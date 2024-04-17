@@ -56,5 +56,35 @@
 
 .cardstext {
     font-size: 50px;
+    margin-top: 50px;
     color: #5e0101;
 }
+
+.list {
+  list-style: none; /* Remove os pontos da lista */
+  padding-left:  25px; /* Remove o espaçamento interno padrão das listas */
+  padding-right:  25px; /* Remove o espaçamento interno padrão das listas */
+
+}
+
+/* Estilo para os itens da lista */
+.list li {
+  color: #5e0101; /* Define a cor do texto */
+  font-size: 20px; /* Define o tamanho da fonte */
+  margin-bottom: 5px; /* Adiciona um pequeno espaçamento entre os itens */
+}
+
+/* Estilo para os títulos das seções */
+.list h2 {
+  color: #5e0101; /* Define a cor dos títulos */
+  font-size: 25px; /* Define o tamanho da fonte dos títulos */
+  margin-bottom: 10px; /* Adiciona um espaçamento inferior aos títulos */
+}
+
+.prices {
+    color: #5e0101; /* Define a cor dos títulos */
+
+}
+.container {
+    display: flex; /* Ativa o flexbox para o contêiner */
+  }
