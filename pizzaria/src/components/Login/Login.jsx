@@ -54,6 +54,3 @@ function Form({ onSubmit }) {
     )
 }
 
-//O usuário cadastrado para testar a API tem as seguintes credenciais:
-//Email: felipe@gmail.com
-//Senha: 123123

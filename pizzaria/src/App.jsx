@@ -12,35 +12,35 @@ import { Register } from './components/Register/Register'
 
 function App() {
 
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(false)
   const [isAdmin, setIsAdmin] = useState(false)
   
   useEffect(() => {
-    const loggedInStatus = sessionStorage.getItem('isLoggedIn');
+    const loggedInStatus = sessionStorage.getItem('isLoggedIn')
     const adminStatus = sessionStorage.getItem('isAdmin')
     if (loggedInStatus === 'true') {
-      setIsLoggedIn(true);
+      setIsLoggedIn(true)
     }
     if (adminStatus === 'true') {
-      setIsAdmin(true);
+      setIsAdmin(true)
     } else {
-      setIsAdmin(false); 
+      setIsAdmin(false)
     }
   }, []);
 
   const handleLogin = (adminStatus) => {
-    setIsLoggedIn(true);
+    setIsLoggedIn(true)
     setIsAdmin(adminStatus)
     sessionStorage.setItem('isLoggedIn', 'true');
-    sessionStorage.setItem('isAdmin', adminStatus ? 'true' : 'false'); // Armazena o status de admin como string 'true' ou 'false'
+    sessionStorage.setItem('isAdmin', adminStatus ? 'true' : 'false')
   };
 
   const handleLogout = () => {
-    setIsLoggedIn(false);
-    setIsAdmin(false); // Reinicia o estado de isAdmin ao fazer logout
-    sessionStorage.removeItem('isLoggedIn');
-    sessionStorage.removeItem('isAdmin');
-    window.location.reload();
+    setIsLoggedIn(false)
+    setIsAdmin(false)
+    sessionStorage.removeItem('isLoggedIn')
+    sessionStorage.removeItem('isAdmin')
+    window.location.reload()
 
   };
 
@@ -50,7 +50,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Home isLoggedIn={isLoggedIn} isAdmin={isAdmin} handleLogout={handleLogout}/>}/>
         <Route path="/login" element={<Login onLogin={handleLogin}/>}/>
-        <Route path="/cardapio" element={<Menu isLoggedIn={isLoggedIn} handleLogout={handleLogout}/>}/>
+        <Route path="/cardapio" element={<Menu isLoggedIn={isLoggedIn} isAdmin={isAdmin} handleLogout={handleLogout}/>}/>
         <Route path="/contato" element={<Contact isLoggedIn={isLoggedIn} handleLogout={handleLogout}/>}/>
         <Route path="/register" element={<Register onLogin={handleLogin}/>}/>
 

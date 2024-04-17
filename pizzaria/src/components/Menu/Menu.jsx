@@ -6,7 +6,7 @@ import Form from 'react-bootstrap/Form';
 import Modal from 'react-bootstrap/Modal';
 import './Menu.css'
 
-export const Menu = ( {isLoggedIn, handleLogout }) => {
+export const Menu = ( {isLoggedIn, isAdmin, handleLogout }) => {
   const [pizzaToppings, setPizzaToppings] = useState([])
 
   const [showDeleteButton, setShowDeleteButton] = useState(false);
@@ -54,7 +54,7 @@ export const Menu = ( {isLoggedIn, handleLogout }) => {
               
             />
 
-            {isLoggedIn && showDeleteButton && (
+            {isLoggedIn && isAdmin && showDeleteButton && (
               <Button
                 className="removeButton"
                 variant="outlined"
@@ -70,7 +70,7 @@ export const Menu = ( {isLoggedIn, handleLogout }) => {
           </div>
         ))}
       </div>
-      {isLoggedIn && <AddPizzaToppingModal></AddPizzaToppingModal>}
+      {isLoggedIn && isAdmin && <AddPizzaToppingModal></AddPizzaToppingModal>}
     </div>
   )
 
