@@ -1,0 +1,60 @@
+.whatsapptext {
+    font-size: 50px;
+    margin-top: 100px;
+    margin-bottom: 50px;
+    color: #5e0101;
+}
+
+.logowhatsapp {
+    height: 150px;
+    border: 5px solid #008f24;
+    padding: 5px;
+    border-radius: 25px;
+    margin-bottom: 50px;
+    box-shadow: 16px 16px 32px rgba(0, 0, 0, 0.5)
+}
+
+.logowhatsapp:hover {
+    border-radius: 25px;
+    padding: 10px;
+    border: #008f24 solid;
+}
+
+.logoVisa {
+    height: 150px;
+    border-radius: 25px;
+    margin-bottom: 50px;
+
+
+}
+
+.logoMastercard {
+    height: 100px;
+    border-radius: 25px;
+    margin-bottom: 50px;
+
+
+}
+
+.logoPix {
+    height: 100px;
+    border-radius: 25px;
+    margin-bottom: 50px;
+
+
+}
+
+.logoAmex {
+    padding-left: 10px;
+    padding-right: 5px;
+    height: 100px;
+    border-radius: 25px;
+    margin-bottom: 50px;
+
+
+}
+
+.cardstext {
+    font-size: 50px;
+    color: #5e0101;
+}
